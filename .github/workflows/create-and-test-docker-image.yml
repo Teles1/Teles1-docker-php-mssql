@@ -30,7 +30,7 @@ jobs:
           --health-timeout 3s
           --health-retries 10
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
