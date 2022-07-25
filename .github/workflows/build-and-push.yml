@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+  schedule:
+    - cron: "0 2 * * 0" # Weekly on Sundays at 02:00
+
+jobs:
+  # PHP 7.4
+  build-7_4-apache:
+    uses: ./.github/workflows/create-and-test-docker-image.yml
+    name: Teles1/php-mssql:7.4-apache
+    secrets: inherit
+    with:
+      source-directory: 7.4/apache
+      image-tag: Teles1/php-mssql:7.4-apache
