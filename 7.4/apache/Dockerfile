@@ -34,3 +34,4 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
 
 # Setting the work directory.
 WORKDIR /var/www
+
