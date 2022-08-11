@@ -4,14 +4,14 @@ ENV ACCEPT_EULA=Y
 
 # Install prerequisites required for tools and extensions installed later on.
 RUN apt-get update \
-    && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev nano unzip \
+    && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev nano unzip libodbc1\
     && rm -rf /var/lib/apt/lists/*
 
 # Install prerequisites for the sqlsrv and pdo_sqlsrv PHP extensions.
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update \
-    && apt-get install -y msodbcsql17 mssql-tools unixodbc-dev \
+    && apt-get install -y unixodbc msodbcsql17 mssql-tools unixodbc-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Retrieve the script used to install PHP extensions from the source container.
