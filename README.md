@@ -7,8 +7,8 @@ The images are built and retagged based on their corresponding upstream once a w
 
 ## Usage
 
-You can pull one of the images with `docker pull Teles1/php-mssql:<tag>`.
-To run a container with an image, you can also use `docker run Teles1/php-mssql:<tag>` directly.
+You can pull one of the images with `docker pull Teles1h/php-mssql:<tag>`.
+To run a container with an image, you can also use `docker run Teles1h/php-mssql:<tag>` directly.
 
 ## Available Versions
  
@@ -23,13 +23,13 @@ To change the PHP configuration, have a look at [the official PHP Docker image r
 After cloning the repository, the images can be built locally using the following command:
 
 ```sh
-docker build -t Teles1/php-mssql:<tag> <version>/<type>
+docker build -t Teles1h/php-mssql:<tag> <version>/<type>
 ```
 
 Building the PHP 8.0 CLI image looks like this:
 
 ```sh
-docker build -t Teles1/php-mssql:7.4-apache
+docker build -t Teles1h/php-mssql:7.4-apache
 ```
 
 ## Contributing
