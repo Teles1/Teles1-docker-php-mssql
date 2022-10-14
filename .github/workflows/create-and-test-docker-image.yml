@@ -44,13 +44,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build ${{ inputs.image-tag }}
+      - name: Build ${{ inputs.image-tag }} from ${{ inputs.source-directory }}
         uses: docker/build-push-action@v3
         with:
           context: ${{ inputs.source-directory }}
           tags: ${{ inputs.image-tag }}
           platforms: linux/amd64
-          load: true
           
       - name: Test SQL Server connection
         uses: addnab/docker-run-action@v3
@@ -58,12 +57,3 @@ jobs:
           image: ${{ inputs.image-tag }}
           options: -v ${{ github.workspace }}/.ci/tests:/work -e MSSQL_HOST=sqlsrv -e MSSQL_PORT=1433 -e MSSQL_DATABASE=master -e MSSQL_USERNAME=sa -e MSSQL_PASSWORD=${{ secrets.TESTS_SQLSRV_DB_SECRET }}
           run: php /work/test_connection.php
-
-      - name: Push ${{ inputs.image-tag }}
-        uses: docker/build-push-action@v3
-        if: ${{ github.event_name != 'pull_request' }}
-        with:
-          context: ${{ inputs.source-directory }}
-          tags: ${{ inputs.image-tag }}
-          platforms: linux/amd64
-          push: true
