@@ -1,5 +1,6 @@
 FROM --platform=linux/amd64 php:7.4-apache
 ENV ACCEPT_EULA=Y
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Install prerequisites required for tools and extensions installed later on.
 RUN apt-get update \
     && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev nano unzip \
