@@ -20,6 +20,7 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 RUN chmod uga+x /usr/bin/install-php-extensions \
     && sync \
     && install-php-extensions bcmath exif gd imagick intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip gmp
-
+RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
+RUN a2enmod rewrite && service apache2 restart
 #Setting the work directory.
 WORKDIR /var/www
