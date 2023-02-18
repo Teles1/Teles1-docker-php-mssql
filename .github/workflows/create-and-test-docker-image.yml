@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build ${{ inputs.image-tag }} and export to Docker from ${{ inputs.source-directory }}
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: ${{ inputs.source-directory }}
           tags: ${{ inputs.image-tag }}
@@ -60,7 +60,7 @@ jobs:
           run: php /work/test_connection.php
 
       - name: Push ${{ inputs.image-tag }} from ${{ inputs.source-directory }}
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         if: ${{ github.event_name != 'pull_request' }}
         with:
           context: ${{ inputs.source-directory }}
