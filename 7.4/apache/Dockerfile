@@ -17,10 +17,11 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
 
 # Install required PHP extensions and all their prerequisites available via apt.
-RUN chmod uga+x /usr/bin/install-php-extensions \
-    && sync \
-    && install-php-extensions bcmath exif gd imagick intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip gmp
+RUN chmod uga+x /usr/bin/install-php-extensions 
+RUN install-php-extensions bcmath exif gd imagick intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip gmp
 RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN a2enmod rewrite && service apache2 restart
+
 #Setting the work directory.
 WORKDIR /var/www
