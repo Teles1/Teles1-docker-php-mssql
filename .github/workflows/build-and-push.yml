@@ -18,3 +18,11 @@ jobs:
     with:
       source-directory: 7.4/apache
       image-tag: teles1h/php-mssql:7.4-apache
+  # PHP 8.2
+  build-8_2-apache:
+    uses: ./.github/workflows/create-and-test-docker-image.yml
+    name: teles1h/php-mssql:8.2-apache
+    secrets: inherit
+    with:
+      source-directory: 8.2/apache
+      image-tag: teles1h/php-mssql:8.2-apache
