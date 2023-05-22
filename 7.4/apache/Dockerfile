@@ -1,5 +1,6 @@
 FROM --platform=linux/amd64 php:7.4-apache-buster
 ENV ACCEPT_EULA=Y
+ENV APACHE_DOCUMENT_ROOT "/var/www/html/public"
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Install prerequisites required for tools and extensions installed later on.
 RUN apt-get update \
