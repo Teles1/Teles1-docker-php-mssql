@@ -8,11 +8,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install prerequisites for the sqlsrv and pdo_sqlsrv PHP extensions.
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc \
     && curl https://packages.microsoft.com/config/debian/10/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update \
-    && apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev libgssapi-krb5-2
-
+    && apt-get ACCEPT_EULA=Y install -y msodbcsql18 mssql-tools18 unixodbc-dev libgssapi-krb5-2
+RUN echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
 
 # Retrieve the script used to install PHP extensions from the source container.
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
